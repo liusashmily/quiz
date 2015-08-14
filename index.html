@@ -27,12 +27,28 @@
         <div class="span5  main">
             <div ng-repeat="quiz in quizs | filter: {category : currentCategory.name} ">
                 <button type="button" class="close">&times;</button>
-                <button type="button" class="btn btn-link">
+                <button type="button" ng-click="startEditing()" class="btn btn-link">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
                 <a href="{{quiz.url}}" target="_blank">{{quiz.title}}</a>
             </div>
             <hr/>
+            <!-- CREATING -->
+            <div ng-if="shouldShowCreating()">
+                <button type="button" class="btn btn-link" ng-click="startCreating();">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Create Bookmark
+                </button>
+                <div ng-if="isCreating">
+                    Create a bookmark!
+                    <button type="button" class="btn btn-link" ng-click="cancelCreating();">Cancel</button>
+                </div>
+            </div>
+            <!-- EDITING -->
+            <div ng-if="shouldShowEditing()">
+                Edit a bookmark!
+                <button type="button" class="btn btn-link" ng-click="cancelEditing();">Cancel</button>
+            </div>
 
         </div>
     </div>
