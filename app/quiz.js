@@ -68,6 +68,18 @@ angular.module('Quiz', [
 
         $scope.currentCategory = null;
 
+        function setCurrentCategory(category) {
+            $scope.currentCategory = category;
+        }
+
+        function isCurrentCategory(category) {
+            return $scope.currentCategory !== null && category.name === $scope.currentCategory.name;
+        }
+
+        // Make setCurrentCategory to public
+        $scope.setCurrentCategory = setCurrentCategory;
+        $scope.isCurrentCategory = isCurrentCategory;
+
 
 
     });

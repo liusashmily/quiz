@@ -17,15 +17,15 @@
 
     <div class="row-fluid">
         <div class="span4 sidebar">
-            <a href="#">
+            <a href="#" ng-click="setCurrentCategory(null)">
                 <img class="logo" src="assets/img/quiz-logo.png">
             </a>
             <ul class="nav nav-sidebar">
-                <li ng-repeat="category in categories"><a href="#">{{category.name}}</a></li>
+                <li ng-repeat="category in categories" ng-class=" {'active': isCurrentCategory(category)} "><a href="#" ng-click="setCurrentCategory(category)">{{category.name}}</a></li>
             </ul>
         </div>
         <div class="span5  main">
-            <div ng-repeat="quiz in quizs">
+            <div ng-repeat="quiz in quizs | filter: {category : currentCategory.name} ">
                 <button type="button" class="close">&times;</button>
                 <button type="button" class="btn btn-link">
                     <span class="glyphicon glyphicon-pencil"></span>
