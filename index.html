@@ -30,19 +30,33 @@
                 <button type="button" ng-click="startEditing()" class="btn btn-link">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <a href="{{quiz.url}}" target="_blank">{{quiz.title}}</a>
+                {{quiz.title}}
             </div>
             <hr/>
             <!-- CREATING -->
             <div ng-if="shouldShowCreating()">
                 <button type="button" class="btn btn-link" ng-click="startCreating();">
                     <span class="glyphicon glyphicon-plus"></span>
-                    Create Bookmark
+                    Create Quiz
                 </button>
                 <div ng-if="isCreating">
-                    Create a bookmark!
+                    Create a quiz!
                     <button type="button" class="btn btn-link" ng-click="cancelCreating();">Cancel</button>
                 </div>
+                <form class="create-form" ng-show="isCreating" role="form" ng-submit="createQuiz(newQuiz)" novalidate>
+                    <div class="form-group">
+                        <label for="newQuizTitle">Quiz Title</label>
+                        <input type="text" class="form-control" id="newQuizTitle" ng-model="newQuiz.title" placeholder="Enter title">
+                    </div>
+                    <div class="form-group">
+                        <label for="newQuizDescription">Quiz Description</label>
+                        <input type="text" class="form-control" id="newQuizDescription" ng-model="newQuiz.description" placeholder="Enter Description for the quiz">
+                    </div>
+                    <button type="submit" class="btn btn-info btn-lg">Create</button>
+                    <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel</button>
+                </form>
+
+
             </div>
             <!-- EDITING -->
             <div ng-if="shouldShowEditing()">

@@ -22,47 +22,47 @@ angular.module('Quiz', [
         $scope.quizs = [{
             "id": 0,
             "title": "AngularJS",
-            "url": "http://angularjs.org",
+            "description": "http://angularjs.org",
             "category": "DrawSomething"
         }, {
             "id": 1,
             "title": "Egghead.io",
-            "url": "http://egghead.io",
+            "description": "http://egghead.io",
             "category": "MultipleChoice"
         }, {
             "id": 2,
             "title": "A List Apart",
-            "url": "http://alistapart.com/",
+            "description": "http://alistapart.com/",
             "category": "Matching"
         }, {
             "id": 3,
             "title": "One Page Love",
-            "url": "http://onepagelove.com/",
+            "description": "http://onepagelove.com/",
             "category": "ShortAnswer"
         }, {
             "id": 4,
             "title": "MobilityWOD",
-            "url": "http://www.mobilitywod.com/",
+            "description": "http://www.mobilitywod.com/",
             "category": "MediaQuestion"
         }, {
             "id": 5,
             "title": "Robb Wolf",
-            "url": "http://robbwolf.com/",
+            "description": "http://robbwolf.com/",
             "category": "MultipleChoice"
         }, {
             "id": 6,
             "title": "Senor Gif",
-            "url": "http://memebase.cheezburger.com/senorgif",
+            "description": "http://memebase.cheezburger.com/senorgif",
             "category": "DrawSomething"
         }, {
             "id": 7,
             "title": "Wimp",
-            "url": "http://wimp.com",
+            "description": "http://wimp.com",
             "category": "Matching"
         }, {
             "id": 8,
             "title": "Dump",
-            "url": "http://dump.com",
+            "description": "http://dump.com",
             "category": "ShortAnswer"
         }];
 
@@ -82,6 +82,28 @@ angular.module('Quiz', [
         $scope.setCurrentCategory = setCurrentCategory;
         $scope.isCurrentCategory = isCurrentCategory;
 
+        // CRUD
+        function resetCreateForm() {
+            $scope.newQuiz = {
+                title: '',
+                description: '',
+                category: $scope.currentCategory
+            }
+            console.log("resetCreateForm" + $scope.currentCategory.name);
+        }
+
+        function createQuiz (quiz) {
+            quiz.id = $scope.quizs.length;
+            quiz.category = $scope.currentCategory;
+            console.log("createQuiz" + quiz.category.name);
+            $scope.quizs.push(quiz);
+            console.log("createQuiz-quizs:" +  $scope.quizs);
+
+            resetCreateForm();
+        }
+
+        $scope.createQuiz = createQuiz;
+
         // Creating and Editing States
         $scope.isCreating = false;
         $scope.isEditing = false;
@@ -89,6 +111,8 @@ angular.module('Quiz', [
         function startCreating () {
             $scope.isCreating = true;
             $scope.isEditing = false;
+
+         //   resetCreateForm();
         }
 
         function cancelCreating () {
